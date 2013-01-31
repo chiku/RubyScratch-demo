@@ -2,6 +2,12 @@ module Intercept
   # code goes in here
 
   def self.included(base)
+    base.instance_eval do
+      def method_added(name)
+        puts "Added #{name}"
+      end
+    end
+
     base.extend ClassMethods
   end
 
@@ -45,7 +51,7 @@ class Test
 
 end
 
-# Test.new.foo
+Test.new.foo
 # Current output =>
 # start initialize
 # end initialize
@@ -73,6 +79,3 @@ end
 # Trace: leave bar
 # end foo
 # Trace: leave foo
-
-Test.c
-Test.new.i
