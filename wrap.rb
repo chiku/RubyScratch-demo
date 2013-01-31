@@ -54,17 +54,8 @@ class Test
 end
 
 Test.new.foo
-# Current output =>
-# start initialize
-# end initialize
-# start foo
-# start bar
-# start baz
-# end baz
-# end bar
-# end foo
 
-# Intended output =>
+# Final output =>
 # Trace: enter initialize
 # start initialize
 # end initialize
