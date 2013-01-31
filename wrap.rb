@@ -1,5 +1,23 @@
 module Intercept
   # code goes in here
+
+  def self.included(base)
+    base.extend ClassMethods
+    base.send(:include, InstanceMethods)
+  end
+
+  module ClassMethods
+    def c
+      puts "c"
+    end
+  end
+
+  module InstanceMethods
+    def i
+      puts "i"
+    end
+  end
+
 end
 
 class Test
@@ -30,7 +48,7 @@ class Test
 
 end
 
-Test.new.foo
+# Test.new.foo
 # Current output =>
 # start initialize
 # end initialize
@@ -58,3 +76,6 @@ Test.new.foo
 # Trace: leave bar
 # end foo
 # Trace: leave foo
+
+Test.c
+Test.new.i
