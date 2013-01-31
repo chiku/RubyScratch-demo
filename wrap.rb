@@ -3,11 +3,24 @@ module Intercept
 
   def self.included(base)
     base.instance_eval do
+
+      @methods = []
+
       def method_added(name)
-        class_eval do
-          puts "#{self.name} : #{name}"
+        if !name.to_s.start_with?("pristine") && !@methods.include?(name)
+          @methods << name
+          new_name = "pristine_#{name}"
+
+          alias_method new_name, name
+
+          define_method(name) do
+            puts "Trace: enter #{name}"
+            send(new_name)
+            puts "Trace: end #{name}"
+          end
         end
       end
+
     end
   end
 end
