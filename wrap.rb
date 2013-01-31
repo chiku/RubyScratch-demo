@@ -3,7 +3,6 @@ module Intercept
 
   def self.included(base)
     base.extend ClassMethods
-    base.send(:include, InstanceMethods)
   end
 
   module ClassMethods
@@ -12,10 +11,8 @@ module Intercept
     end
   end
 
-  module InstanceMethods
-    def i
-      puts "i"
-    end
+  def i
+    puts "i"
   end
 
 end
