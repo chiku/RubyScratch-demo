@@ -4,23 +4,12 @@ module Intercept
   def self.included(base)
     base.instance_eval do
       def method_added(name)
-        puts "Added #{name}"
+        class_eval do
+          puts "#{self.name} : #{name}"
+        end
       end
     end
-
-    base.extend ClassMethods
   end
-
-  module ClassMethods
-    def c
-      puts "c"
-    end
-  end
-
-  def i
-    puts "i"
-  end
-
 end
 
 class Test
