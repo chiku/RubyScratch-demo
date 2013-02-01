@@ -9,7 +9,7 @@ module Intercept
       def method_added(name)
         if !name.to_s.start_with?("pristine") && !@methods.include?(name)
           @methods << name
-          new_name = "pristine_#{name}"
+          new_name = "pristine #{name}"
 
           alias_method new_name, name
 
